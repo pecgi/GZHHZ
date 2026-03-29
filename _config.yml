@@ -1,0 +1,38 @@
+# 网站配置
+title: 每日阅读汇总
+description: 我的微信公众号文章收藏夹
+author: 你的名字
+baseurl: "/GZHHZ" # 仓库名称
+url: "" # 自动获取，无需修改
+
+# 构建设置
+markdown: kramdown
+highlighter: rouge
+permalink: /:year/:month/:day/:title/
+
+# 分页
+paginate: 10
+paginate_path: "/page/:num/"
+
+# 插件
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-paginate
+
+# 默认设置
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+# 排除文件
+exclude:
+  - README.md
+  - scripts/
+  - package.json
+  - package-lock.json
+  - node_modules/
+  - .gitignore

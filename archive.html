@@ -1,0 +1,118 @@
+---
+layout: default
+title: 归档
+---
+
+<div class="archive-page">
+  <h1 class="page-title">文章归档</h1>
+  
+  {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+  
+  {% for year in posts_by_year %}
+    <section class="year-section">
+      <h2 class="year-title">{{ year.name }}年</h2>
+      
+      {% assign posts_by_month = year.items | group_by_exp: "post", "post.date | date: '%m'" %}
+      
+      {% for month in posts_by_month %}
+        <div class="month-group">
+          <h3 class="month-title">{{ month.name }}月</h3>
+          <ul class="archive-list">
+            {% for post in month.items %}
+              <li class="archive-item">
+                <time class="archive-date">{{ post.date | date: "%d" }}日</time>
+                <a href="{{ post.url | relative_url }}" class="archive-link">{{ post.title }}</a>
+                {% if post.source %}
+                  <span class="archive-source">{{ post.source }}</span>
+                {% endif %}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endfor %}
+    </section>
+  {% endfor %}
+  
+  {% if site.posts.size == 0 %}
+    <div class="empty-state">
+      <div class="empty-icon">📚</div>
+      <h2>还没有文章</h2>
+      <p>去添加你的第一篇文章吧！</p>
+    </div>
+  {% endif %}
+</div>
+
+<style>
+.archive-page {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 32px;
+}
+
+.year-section {
+  margin-bottom: 40px;
+}
+
+.year-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--accent-color);
+}
+
+.month-group {
+  margin-bottom: 24px;
+  padding-left: 16px;
+}
+
+.month-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.archive-list {
+  list-style: none;
+  padding: 0;
+}
+
+.archive-item {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.archive-date {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  min-width: 40px;
+}
+
+.archive-link {
+  flex: 1;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.archive-link:hover {
+  color: var(--accent-color);
+}
+
+.archive-source {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  background: var(--tag-bg);
+  color: var(--tag-color);
+  border-radius: 4px;
+}
+</style>

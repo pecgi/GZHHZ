@@ -1,0 +1,58 @@
+---
+layout: default
+---
+
+<article class="article-page">
+  <header class="article-header">
+    <div class="article-meta-top">
+      {% if page.source %}
+        <span class="source-badge">{{ page.source }}</span>
+      {% endif %}
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y年%m月%d日 %H:%M" }}</time>
+    </div>
+    <h1 class="article-title">{{ page.title }}</h1>
+    {% if page.author %}
+      <div class="article-author">作者：{{ page.author }}</div>
+    {% endif %}
+    {% if page.tags.size > 0 %}
+      <div class="article-tags">
+        {% for tag in page.tags %}
+          <span class="tag">{{ tag }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </header>
+
+  {% if page.image %}
+    <div class="article-cover">
+      <img src="{{ page.image }}" alt="{{ page.title }}">
+    </div>
+  {% endif %}
+
+  <div class="article-content">
+    {{ content }}
+  </div>
+
+  <footer class="article-footer">
+    <div class="original-link">
+      <a href="{{ page.original_url }}" target="_blank" rel="noopener" class="btn btn-outline">
+        查看原文 →
+      </a>
+    </div>
+    
+    <nav class="article-nav">
+      {% if page.previous.url %}
+        <a href="{{ page.previous.url | relative_url }}" class="prev-article">
+          <span class="nav-label">← 上一篇</span>
+          <span class="nav-title">{{ page.previous.title }}</span>
+        </a>
+      {% endif %}
+      {% if page.next.url %}
+        <a href="{{ page.next.url | relative_url }}" class="next-article">
+          <span class="nav-label">下一篇 →</span>
+          <span class="nav-title">{{ page.next.title }}</span>
+        </a>
+      {% endif %}
+    </nav>
+  </footer>
+</article>

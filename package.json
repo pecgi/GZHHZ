@@ -1,0 +1,16 @@
+{
+  "name": "wechat-reader",
+  "version": "1.0.0",
+  "description": "微信公众号文章汇总阅读站",
+  "scripts": {
+    "fetch": "node scripts/fetch-articles.js",
+    "dev": "bundle exec jekyll serve",
+    "build": "bundle exec jekyll build"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0-rc.12",
+    "@octokit/rest": "^20.0.2"
+  },
+  "devDependencies": {}
+}
