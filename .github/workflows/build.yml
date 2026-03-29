@@ -2,7 +2,7 @@ name: Build and Deploy
 
   on:
     push:
-      branches: [ main, master ]
+      branches: [main, master]
     issues:
       types: [opened, edited, reopened]
     workflow_dispatch:
@@ -11,10 +11,6 @@ name: Build and Deploy
     contents: write
     pages: write
     id-token: write
-
-  concurrency:
-    group: "pages"
-    cancel-in-progress: false
 
   jobs:
     build:
